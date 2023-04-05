@@ -1,45 +1,31 @@
-import {authorize, refresh} from 'react-native-app-auth';
+import React from 'react'
 
-class AuthenticationHandler {
-  constructor() {
-    this.spotifyAuthConfig = {
-      clientId: '80d018cbb2a54b55a5bce43353c0f9a2',
-      clientSecret: 'e7e8b93dca1d433ba273f19f06f7f288',
-      redirectUrl: 'com.prueba://oauthredirect/',
-      scopes: [
-        'playlist-read-private',
-        'playlist-modify-public',
-        'playlist-modify-private',
-        'user-library-read',
-        'user-library-modify',
-        'user-top-read',
-      ],
-      serviceConfiguration: {
-        authorizationEndpoint: 'https://accounts.spotify.com/authorize',
-        tokenEndpoint: 'https://accounts.spotify.com/api/token',
-      },
-    };
-  }
+import {
+  View, Button
+} from 'react-native';
 
-  async onLogin() {
-    try {
-      const result = await authorize(this.spotifyAuthConfig);
-      alert(JSON.stringify(result));
-      return result;
-    } catch (error) {
-      console.log(JSON.stringify(error));
-    } 
-  }
-
-  async refreshLogin(refreshToken) {
-    const result = await refresh(this.spotifyAuthConfig, {
-      refreshToken: refreshToken,
-    });
-    return result;
-  }
-
+const handleCLick = ()=>{
+ 
+  const clientId ="80d018cbb2a54b55a5bce43353c0f9a2";
+  const redirectUrl = "http://localhost:3000/";
+  const apiUrl = "https://accounts.spotify.com/authorize";
+  const scope = ['user-read-email',
+                  'user-read-private',
+                  'user-read-playback-state',
+                  'user-modify-playback-state',
+                  'user-read-currently-playing',
+                  'user-read-playback-position',
+                  'user-top-read',
+                  'user-read-recently-played'];
+window.location.href= `${apiUrl}?client_id=${clientId}&redirect_uri=${redirectUrl}&scope=${scope.join(" ")}&response_type=token&show_daialog=true`;
 }
-
-const authHandler = new AuthenticationHandler();
-
-export default authHandler;
+export default function Login() {
+  return (
+    <View>
+      <img src='https://storage.googleapis.com/pr-newsroom-wp/1/2018/11/Spotify_Logo_CMYK_Black.png' 
+      alt='Spotify logo'/>
+      
+      <Button onPress={() => handleCLick()} title="Press to login"/>
+    </View>
+  )
+}
