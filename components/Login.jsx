@@ -7,7 +7,7 @@ import {
 const handleCLick = ()=>{
  
   const clientId ="80d018cbb2a54b55a5bce43353c0f9a2";
-  const redirectUrl = "http://localhost:3000/";
+  const redirectUrl = "http://localhost:19006/";
   const apiUrl = "https://accounts.spotify.com/authorize";
   const scope = ['user-read-email',
                   'user-read-private',
@@ -26,6 +26,8 @@ export default function Login() {
       alt='Spotify logo'/>
       
       <Button onPress={() => handleCLick()} title="Press to login"/>
+      
     </View>
+    
   )
 }
